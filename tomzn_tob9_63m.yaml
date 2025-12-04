@@ -1,0 +1,165 @@
+name: TOMZN TOB9-63M Smart WiFi Circuit Breaker
+products:
+  - id: sbelwddappwy2sj6
+    manufacturer: TOMZN
+    model: TOB9-63M
+entities:
+  - entity: select
+    name: " SirYasko's TOMZN TOB9-63M v1.0.0 "
+    icon: "mdi:information-outline"
+    hidden: false
+    dps:
+      - id: 999
+        type: string
+        optional: true
+        name: option
+        readonly: true
+        mapping:
+          - dps_val: null
+            value: "https://github.com/SirYasko/HA-Tuya-Local"
+  - entity: switch
+    name: "Switch"
+    dps:
+      - id: 1
+        type: boolean
+        name: switch #switch_1
+  - entity: number
+    name: "Timer"
+    icon: "mdi:timer-sand"
+    mode: box
+    dps:
+      - id: 9
+        type: integer
+        name: value #countdown_1
+        unit: s
+        class: duration
+        min: 0
+        max: 86400
+  - entity: sensor
+    name: "Energy (Electricity Consumption)"
+    dps:
+      - id: 17
+        type: integer
+        name: sensor #add_ele
+        optional: true
+        unit: kWh
+        class: measurement
+        mapping:
+          - dps_val: null
+          - scale: 1000
+            precision: 3
+      - id: 25
+        type: integer
+        name: calibration #electricity_coe
+        optional: true
+  - entity: sensor
+    name: "Current"
+    class: current
+    dps:
+      - id: 18
+        type: integer
+        name: sensor #cur_current
+        unit: A
+        force: true
+        class: measurement
+        mapping:
+          - scale: 1000
+            precision: 2
+      - id: 23
+        type: integer
+        name: calibration #electric_coe
+        optional: true
+  - entity: sensor
+    name: "Power"
+    class: power
+    dps:
+      - id: 19
+        name: sensor #cur_power
+        type: integer
+        unit: W
+        class: measurement
+        force: true
+        mapping:
+          - scale: 10
+            precision: 2
+      - id: 24
+        name: calibration #power_coe
+        type: integer
+        optional: true
+      - id: 21
+        type: bitfield
+        name: test_bit
+        optional: true
+  - entity: sensor
+    name: "Voltage"
+    class: voltage
+    dps:
+      - id: 20
+        type: integer
+        name: sensor #cur_voltage
+        unit: V
+        force: true
+        class: measurement
+        mapping:
+          - scale: 10
+            precision: 1
+      - id: 22
+        type: integer
+        name: calibration #voltage_coe
+        optional: true
+  - entity: select
+    name: "Relay Status"
+    icon: "mdi:electric-switch"
+    category: config
+    dps:
+      - id: 38
+        type: string
+        optional: true
+        name: option #relay_status
+        mapping:
+          - dps_val: "off"
+            value: "Power Off"
+          - dps_val: "on"
+            value: "Power On"
+          - dps_val: "memory"
+            value: "Memory"
+  - entity: select
+    name: "Light Mode"
+    icon: "mdi:power"
+    category: config
+    dps:
+      - id: 40
+        type: string
+        optional: true
+        name: option #light_mode
+        mapping:
+          - dps_val: "relay"
+            value: "Relay"
+          - dps_val: "pos"
+            value: "Position"
+          - dps_val: "none"
+            value: "None"
+          - dps_val: "on"
+            value: "On"
+          - dps_val: null
+            value: "Relay"
+            hidden: true
+  - entity: switch
+    name: "Maintenance Lock"
+    icon: "mdi:lock-outline"
+    category: config
+    dps:
+      - id: 41
+        type: boolean
+        name: switch #child_lock
+  - entity: text
+    name: "Cycle Time"
+    icon: "mdi:form-textbox"
+    hidden: false
+    category: diagnostic
+    dps:
+      - id: 42
+        type: string
+        optional: true
+        name: value #cycle_time
+
